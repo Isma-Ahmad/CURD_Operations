@@ -1,5 +1,5 @@
 const Info = require("../services/data_services");
-// console.log("Service object:", service);
+
 
 class InfoController {
  constructor(){
