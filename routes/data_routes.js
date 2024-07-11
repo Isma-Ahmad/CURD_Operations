@@ -1,12 +1,24 @@
-const {Router} = require("express");
-const route = Router();
+const express = require('express');
+const InfoController = require('../controller/data_controller');
 
-const controller = require("../controller/data_controller");
+class InfoRoutes {
+  constructor() {
+    this.router = express.Router();
+    this.controller = new InfoController();
+    this.initRoutes();
+  }
 
-route.get("/" , controller.getInfo);
-route.get("/:id" , controller.getInfoById);
-route.post("/" , controller.addInfo);
-route.put("/:id" , controller.updateInfo);
-route.delete("/:id" , controller.deleteInfo);
+  initRoutes() {
+    this.router.post('/', this.controller.addInfo.bind(this.controller));
+    this.router.get('/', this.controller.getInfo.bind(this.controller));
+    this.router.get('/:id', this.controller.getInfoById.bind(this.controller));
+    this.router.put('/:id', this.controller.updateInfo.bind(this.controller));
+    this.router.delete('/:id', this.controller.deleteInfo.bind(this.controller));
+  }
 
-module.exports = route;
+  getRouter() {
+    return this.router;
+  }
+}
+
+module.exports = new InfoRoutes();

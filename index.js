@@ -1,9 +1,10 @@
 const express = require("express");
-const info = require("./routes/data_routes")
+const infoRoutes = require("./routes/data_routes")
 const app = express();
 const port = 9000;
 app.use(express.json());
 
-app.use("/" , info);
+// const infoRoutes = new InfoRoutes();
+app.use('/', infoRoutes.getRouter());
 
 app.listen(port , ()=> console.log(`sever is start ${port}`));
